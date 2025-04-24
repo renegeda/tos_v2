@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /
+
+<FilesMatch "\.(jpg|jpeg|png)$">
+  Header set Cache-Control "max-age=0, must-revalidate"
+</FilesMatch>
+
+# Разрешить доступ к папкам
+Options +Indexes +FollowSymLinks
+
+# Перенаправлять все запросы на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
